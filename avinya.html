@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>अविnya | DBRA CM Shri School Magazine</title>
+
+<!-- Google Fonts (Including Rozha One for Hindi 'अवि' & Playfair/Dancing Script for 'nya') -->
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Dancing+Script:wght@700&family=Montserrat:wght@500;700;800&family=Open+Sans:wght@400;600&family=Pacifico&family=Playfair+Display:ital,wght@1,600;1,700&family=Rozha+One&display=swap" rel="stylesheet">
+
+<style>
+    /* =========================================
+       1. BASE RESET & ROYAL LITERARY VARIABLES
+       ========================================= */
+    :root {
+        --deep-bg: #07051a;
+        --light-bg: #110d2e;
+        --accent-gold: #ffd700;
+        --accent-crimson: #ff2e55;
+        --accent-magenta: #ff007f;
+        --accent-cyan: #00f3ff;
+        --text-light: #e2e8f0;
+        --text-white: #ffffff;
+        --glass-bg: rgba(255, 255, 255, 0.04);
+        --glass-border: rgba(255, 215, 0, 0.18);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body, html {
+        width: 100%;
+        background-color: var(--deep-bg);
+        background-image: 
+            radial-gradient(circle at 15% 20%, rgba(255, 0, 127, 0.08) 0%, transparent 40%),
+            radial-gradient(circle at 85% 60%, rgba(0, 243, 255, 0.08) 0%, transparent 40%),
+            radial-gradient(circle at 50% 90%, rgba(255, 215, 0, 0.06) 0%, transparent 50%);
+        font-family: 'Open Sans', sans-serif;
+        color: var(--text-light);
+        overflow-x: hidden;
+        scroll-behavior: smooth;
+    }
+    body.locked { overflow-y: hidden; }
+
+    /* =========================================
+       CUSTOM BILINGUAL "अविnya" TYPOGRAPHY STYLING
+       ========================================= */
+    .avinya-word {
+        display: inline-flex;
+        align-items: baseline;
+        position: relative;
+        white-space: nowrap;
+        letter-spacing: 0 !important;
+    }
+    .avinya-word .avi-hi {
+        font-family: 'Rozha One', serif;
+        font-weight: 400;
+        color: var(--text-white);
+        text-shadow: 0 0 18px rgba(255, 215, 0, 0.45);
+         -webkit-text-fill-color: var(--text-white);
+    }
+    .avinya-word .nya-en {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-style: italic;
+        font-weight: 700;
+        color: var(--accent-crimson);
+        -webkit-text-fill-color: var(--accent-crimson);
+        text-shadow: 0 0 16px rgba(255, 46, 85, 0.55);
+        margin-left: 1px;
+        position: relative;
+    }
+    /* Golden Quill Feather Accent over 'nya' */
+    .avinya-word .nya-en::after {
+        content: '🪶';
+        position: absolute;
+        top: -0.55em;
+        right: -0.25em;
+        font-size: 0.52em;
+        font-style: normal;
+        transform: rotate(15deg);
+        filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.8));
+        pointer-events: none;
+    }
+    .floral-wing {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        margin: 0 12px;
+        font-style: normal;
+        vertical-align: middle;
+    }
+    .floral-wing .dot-sm { width: 5px; height: 5px; border-radius: 50%; background: var(--accent-cyan); display: inline-block; }
+    .floral-wing .dot-md { width: 8px; height: 8px; border-radius: 50%; background: var(--accent-gold); display: inline-block; }
+    .floral-wing .flower { color: var(--accent-crimson); font-size: 0.7em; -webkit-text-fill-color: var(--accent-crimson); }
+
+    /* =========================================
+       2. INTRO ANIMATION (ROYAL LITERARY THEME)
+       ========================================= */
+    #intro-screen {
+        position: fixed; inset: 0; z-index: 9999;
+        background: radial-gradient(circle at center, var(--light-bg) 0%, var(--deep-bg) 100%);
+        display: flex; flex-direction: column; justify-content: center; align-items: center;
+        transition: opacity 0.9s ease-out, visibility 0.9s;
+        overflow: hidden;
+        padding: 20px;
+    }
+
+    #skip-intro-btn {
+        position: absolute; bottom: 30px; right: 30px; z-index: 30;
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(10px);
+        border: 1px solid var(--accent-gold);
+        color: var(--accent-gold);
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 700; font-size: 13px;
+        padding: 10px 22px; border-radius: 30px;
+        cursor: pointer; letter-spacing: 1px;
+        text-transform: uppercase;
+        transition: all 0.3s ease;
+        box-shadow: 0 0 15px rgba(255, 215, 0, 0.25);
+    }
+    #skip-intro-btn:hover {
+        background: var(--accent-gold); color: var(--deep-bg);
+        box-shadow: 0 0 25px rgba(255, 215, 0, 0.7);
+        transform: translateX(4px);
+    }
+
+    .school-logo-container {
+        position: relative;
+        width: 130px; height: 130px;
+        margin-bottom: 18px;
+        border-radius: 50%;
+        z-index: 15;
+        display: flex; justify-content: center; align-items: center;
+        opacity: 0; transform: scale(0.5);
+        animation: popScale 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards 0.2s;
+        box-shadow: 0 0 35px rgba(255, 215, 0, 0.45);
+    }
+    
+    .school-logo-track {
+        position: absolute; inset: -4px; border-radius: 50%; overflow: hidden;
+    }
+    
+    .school-logo-track::before {
+        content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+        background: conic-gradient(transparent 0%, transparent 50%, var(--accent-magenta) 70%, var(--accent-gold) 85%, var(--accent-cyan) 100%);
+        animation: spinBeam 2s linear infinite;
+    }
+
+    .school-logo-container img {
+        position: relative; z-index: 2; width: 100%; height: 100%; object-fit: cover; border-radius: 50%;
+        border: 4px solid var(--deep-bg);
+    }
+
+    .intro-text-container { text-align: center; z-index: 10; }
+    
+    .text-stylish {
+        font-family: 'Pacifico', cursive; font-size: clamp(1.6rem, 4vw, 2.6rem);
+        color: var(--accent-cyan); text-shadow: 0 0 15px rgba(0, 243, 255, 0.5);
+        opacity: 0; transform: translateY(20px);
+        animation: fadeUp 0.8s forwards 0.4s; display: block; margin-bottom: 5px;
+    }
+
+    .text-formal {
+        font-family: 'Cinzel', serif; font-weight: 800; font-size: clamp(2rem, 5vw, 3.6rem);
+        color: var(--text-white); letter-spacing: 3px; text-shadow: 0 5px 20px rgba(0, 0, 0, 0.9);
+        opacity: 0; transform: scale(0.9);
+        animation: popScale 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards 0.8s;
+        display: block;
+    }
+
+    .text-magazine-title {
+        font-size: clamp(2.2rem, 5vw, 3.8rem);
+        margin-top: 14px; display: block;
+        opacity: 0; transform: translateY(20px);
+        animation: fadeUp 0.9s forwards 1.2s;
+    }
+
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+    @keyframes popScale { to { opacity: 1; transform: scale(1); } }
+    @keyframes spinBeam { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    @keyframes shineText { to { background-position: 200% center; } }
+
+    #particle-container { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
+    .particle {
+        position: absolute; font-family: 'Montserrat', sans-serif; font-weight: 800;
+         white-space: nowrap; opacity: 0;
+        text-shadow: 0 10px 20px rgba(0,0,0,0.8);
+    }
+
+    /* 3D Golden Magazine Animation */
+    .book-wrapper { margin-top: 35px; perspective: 1200px; opacity: 0; animation: fadeUp 1s forwards 1.5s; z-index: 10; }
+    .book { position: relative; width: 150px; height: 105px; transform-style: preserve-3d; transform: rotateX(28deg) rotateY(-18deg); }
+    .cover, .page { position: absolute; width: 50%; height: 100%; top: 0; left: 50%; transform-origin: left center; border-radius: 2px 8px 8px 2px; }
+    .cover {
+        background: linear-gradient(135deg, #fff6d6, var(--accent-gold));
+        box-shadow: 0 0 25px rgba(255, 215, 0, 0.5);
+        border: 2px solid var(--accent-crimson);
+        display: flex; align-items: center; justify-content: center;
+        font-size: 15px; font-weight: 800; color: #07051a;
+    }
+    .page { background: linear-gradient(to right, #e2e8f0, #ffffff); border: 1px solid #cbd5e1; }
+    .p1 { animation: flip 2.2s infinite ease-in-out; animation-delay: 0s; }
+    .p2 { animation: flip 2.2s infinite ease-in-out; animation-delay: 0.18s; }
+    .p3 { animation: flip 2.2s infinite ease-in-out; animation-delay: 0.36s; }
+    .p4 { animation: flip 2.2s infinite ease-in-out; animation-delay: 0.54s; }
+
+    @keyframes flip {
+        0%, 10% { transform: rotateY(0deg); }
+        50%, 65% { transform: rotateY(-175deg); }
+        100% { transform: rotateY(0deg); }
+    }
+
+    /* =========================================
+       3. MAIN LAYOUT, BANNER & MARQUEE TICKER
+       ========================================= */
+    #main-content { opacity: 0; transition: opacity 1.2s ease-in; display: none; }
+    .banner-container { width: 100%; line-height: 0; font-size: 0; position: relative; }
+    .banner-container img { width: 100%; height: auto; display: block; border-bottom: 2px solid rgba(255, 215, 0, 0.3); }
+
+    .marquee-wrapper {
+        width: 100%;
+        background: linear-gradient(90deg, #0b0726, #1a0f3e, #0b0726);
+        border-top: 1px solid rgba(255, 215, 0, 0.3);
+        border-bottom: 1px solid rgba(0, 243, 255, 0.3);
+        overflow: hidden;
+        padding: 14px 0;
+        position: relative;
+        box-shadow: 0 5px 25px rgba(0,0,0,0.6);
+    }
+    .marquee-track {
+        display: flex;
+        width: max-content;
+        animation: marqueeSlide 28s linear infinite;
+    }
+    .marquee-track:hover { animation-play-state: paused; }
+    .marquee-content {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 800;
+        font-size: 14px;
+        letter-spacing: 2px;
+        color: var(--accent-gold);
+        white-space: nowrap;
+        padding-right: 50px;
+        text-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
+    }
+    .marquee-content span.sep { color: var(--accent-cyan); margin: 0 18px; }
+    @keyframes marqueeSlide {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+    }
+
+    /* =========================================
+       4. DIVERSE SCROLL & SLIDING ANIMATIONS
+       ========================================= */
+    .reveal-up { opacity: 0; transform: translateY(50px); transition: all 0.9s cubic-bezier(0.22, 1, 0.36, 1); }
+    .slide-in-left { opacity: 0; transform: translateX(-90px); transition: all 0.9s cubic-bezier(0.22, 1, 0.36, 1); }
+    .slide-in-right { opacity: 0; transform: translateX(90px); transition: all 0.9s cubic-bezier(0.22, 1, 0.36, 1); }
+    .pop-up-scale { opacity: 0; transform: scale(0.88) translateY(40px); transition: all 0.9s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+
+    .reveal-active {
+        opacity: 1 !important;
+        transform: translate(0, 0) scale(1) !important;
+    }
+
+    /* =========================================
+       5. INSPIRING HERO QUOTE SECTION
+       ========================================= */
+    .inspiring-section { padding: 60px 20px 35px; text-align: center; max-width: 1050px; margin: 0 auto; }
+    .magazine-badge {
+        display: inline-block;
+        padding: 6px 20px;
+        border-radius: 30px;
+        background: rgba(255, 215, 0, 0.1);
+        border: 1px solid var(--accent-gold);
+        color: var(--accent-gold);
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 700;
+        font-size: 12px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        margin-bottom: 18px;
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+    }
+    .inspire-text {
+        font-family: 'Cinzel', serif; font-size: clamp(1.8rem, 3.5vw, 3rem); font-weight: 800;
+        line-height: 1.4; color: var(--text-white);
+    }
+    .inspire-sub {
+        margin-top: 14px;
+        font-size: clamp(1rem, 1.8vw, 1.15rem);
+        color: #cbd5e1;
+        max-width: 780px;
+        margin-left: auto; margin-right: auto;
+        line-height: 1.7;
+    }
+
+    /* =========================================
+       6. HEYZINE FLIPBOOK LOUNGE & WEBPAGE CONTROLS
+       ========================================= */
+    .flipbook-lounge {
+        max-width: 1260px;
+        margin: 10px auto 70px;
+        padding: 0 20px;
+        transition: max-width 0.4s ease;
+    }
+    .flipbook-lounge.theater-mode {
+        max-width: 98vw;
+    }
+
+    /* Top Webpage Bar */
+    .reader-top-bar {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 20px;
+        background: rgba(17, 13, 46, 0.88);
+        backdrop-filter: blur(12px);
+        padding: 14px 24px;
+        border-radius: 18px;
+        border: 1px solid rgba(255, 215, 0, 0.28);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .reader-brand-title {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-family: 'Cinzel', serif;
+        font-weight: 800;
+        font-size: 20px;
+        color: var(--accent-gold);
+        letter-spacing: 1.5px;
+    }
+    .live-dot {
+        width: 10px; height: 10px;
+        background: #00ff88;
+        border-radius: 50%;
+        box-shadow: 0 0 12px #00ff88;
+        animation: pulseDot 1.5s infinite;
+    }
+    @keyframes pulseDot {
+        0%, 100% { transform: scale(1); opacity: 1; }
+        50% { transform: scale(1.35); opacity: 0.6; }
+    }
+
+    .action-links {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    .btn-action {
+        background: rgba(0, 243, 255, 0.1);
+        border: 1px solid var(--accent-cyan);
+        color: var(--accent-cyan);
+        padding: 9px 16px;
+        border-radius: 10px;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 700;
+        font-size: 12px;
+        cursor: pointer;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+    }
+    .btn-action:hover {
+        background: var(--accent-cyan);
+        color: var(--deep-bg);
+        box-shadow: 0 0 18px rgba(0, 243, 255, 0.5);
+    }
+    .btn-action.gold-btn {
+        background: rgba(255, 215, 0, 0.12);
+        border-color: var(--accent-gold);
+        color: var(--accent-gold);
+    }
+    .btn-action.gold-btn:hover {
+        background: var(--accent-gold);
+        color: var(--deep-bg);
+        box-shadow: 0 0 18px rgba(255, 215, 0, 0.6);
+    }
+
+    /* Glowing Snake Frame around Heyzine Flipbook */
+    .viewer-outer-frame {
+        position: relative;
+        width: 100%;
+        border-radius: 24px;
+        padding: 5px;
+        background: var(--light-bg);
+        overflow: hidden;
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(255, 215, 0, 0.15);
+    }
+    .viewer-outer-frame::before {
+        content: '';
+        position: absolute;
+        top: -50%; left: -50%; width: 200%; height: 200%;
+        background: conic-gradient(from 0deg, transparent 55%, var(--accent-magenta) 75%, var(--accent-gold) 90%, var(--accent-cyan) 100%);
+        animation: spinBeam 5s linear infinite;
+        z-index: 1;
+    }
+    .viewer-inner-stage {
+        position: relative;
+        z-index: 2;
+        background: radial-gradient(circle at center, #18123d 0%, #08051b 100%);
+        border-radius: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+        overflow: hidden;
+    }
+
+    /* Heyzine Iframe Wrapper */
+    .heyzine-stage-box {
+        width: 100%;
+        height: 650px;
+        border-radius: 14px;
+        overflow: hidden;
+        position: relative;
+        border: 1px solid rgba(255, 215, 0, 0.25);
+        box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.8);
+        transition: transform 0.3s ease, height 0.3s ease;
+        background: #0b0820;
+    }
+    .flipbook-lounge.theater-mode .heyzine-stage-box {
+        height: 80vh;
+    }
+
+    .fp-iframe {
+        width: 100%;
+        height: 100%;
+        border: 0;
+        display: block;
+    }
+
+    /* Webpage External Control Toolbar */
+    .reader-toolbar {
+        margin-top: 18px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(12px);
+        padding: 12px 22px;
+        border-radius: 40px;
+        border: 1px solid rgba(255, 215, 0, 0.22);
+        z-index: 20;
+        width: 100%;
+        max-width: 980px;
+    }
+
+    .tool-btn {
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 215, 0, 0.35);
+        color: var(--text-white);
+        padding: 9px 16px;
+        border-radius: 25px;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 700;
+        font-size: 12px;
+        cursor: pointer;
+        transition: all 0.25s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+    }
+    .tool-btn:hover {
+        background: var(--accent-gold);
+        color: var(--deep-bg);
+        box-shadow: 0 0 15px rgba(255, 215, 0, 0.55);
+        transform: translateY(-2px);
+    }
+
+    .page-counter-badge {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 800;
+        font-size: 13px;
+        color: var(--accent-gold);
+        padding: 8px 16px;
+        background: rgba(0, 0, 0, 0.5);
+        border-radius: 20px;
+        border: 1px solid rgba(255, 215, 0, 0.3);
+        min-width: 110px;
+        text-align: center;
+    }
+
+    /* Quick Page Jump Box */
+    .page-jump-group {
+        display: flex;
+        align-items: center;
+        background: rgba(0, 0, 0, 0.45);
+        border: 1px solid rgba(0, 243, 255, 0.35);
+        border-radius: 25px;
+        padding: 3px 5px 3px 12px;
+        gap: 6px;
+    }
+    .page-jump-group input {
+        width: 52px;
+        background: transparent;
+        border: none;
+        color: var(--text-white);
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 700;
+        font-size: 13px;
+        text-align: center;
+        outline: none;
+    }
+    .page-jump-group input::placeholder {
+        color: #94a3b8;
+        font-weight: 500;
+    }
+    .page-jump-btn {
+        background: var(--accent-cyan);
+        color: var(--deep-bg);
+        border: none;
+        border-radius: 20px;
+        padding: 6px 12px;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 800;
+        font-size: 11px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+    .page-jump-btn:hover {
+        background: var(--accent-gold);
+        box-shadow: 0 0 10px var(--accent-gold);
+    }
+
+    /* =========================================
+       7. SLIDING INFORMATIONAL BLOCKS
+       ========================================= */
+    .info-container {
+        max-width: 1180px; margin: 0 auto; padding: 10px 20px 80px;
+        display: flex; flex-direction: column; gap: 45px; overflow: hidden;
+    }
+    .info-block {
+        background: var(--glass-bg); backdrop-filter: blur(12px);
+        border: 1px solid var(--glass-border); border-radius: 22px;
+        padding: 40px; position: relative; overflow: hidden;
+        box-shadow: 0 12px 35px rgba(0,0,0,0.55);
+    }
+    .info-block::before {
+        content: ''; position: absolute; top: 0; left: 0; width: 6px; height: 100%;
+        background: linear-gradient(to bottom, var(--accent-gold), var(--accent-magenta), var(--accent-cyan));
+        box-shadow: 0 0 15px var(--accent-gold);
+    }
+    .info-heading {
+        font-family: 'Cinzel', serif; font-size: 27px; font-weight: 800;
+        color: var(--text-white); margin-bottom: 18px; letter-spacing: 1.5px;
+        display: inline-block; position: relative;
+    }
+    .info-heading::after {
+        content: ''; position: absolute; bottom: -6px; left: 0; width: 55px; height: 3px;
+        background: var(--accent-gold); transition: width 0.4s ease;
+    }
+    .info-block:hover .info-heading::after { width: 100%; }
+    .info-text { font-size: 16px; line-height: 1.8; color: #cbd5e1; margin-bottom: 14px; text-align: justify; }
+
+    .info-list { list-style: none; margin-top: 15px; padding-left: 10px; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; }
+    .info-list li { font-size: 15.5px; color: #f1f5f9; display: flex; align-items: center; }
+    .info-list li::before {
+        content: '✦'; color: var(--accent-gold); font-weight: bold;
+        margin-right: 12px; font-size: 18px; text-shadow: 0 0 10px var(--accent-gold);
+    }
+
+    /* =========================================
+       8. FOOTER SECTION (SOCIALS & FLOWING BG)
+       ========================================= */
+    .site-footer {
+        position: relative; width: 100%; min-height: 340px;
+        background-color: var(--light-bg);
+        display: flex; flex-direction: column; justify-content: center; align-items: center;
+        overflow: hidden; border-top: 1px solid rgba(255, 215, 0, 0.2);
+        gap: 28px; padding: 40px 20px;
+    }
+    #flow-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+    .flow-item { position: absolute; top: 0; left: 0; will-change: transform, opacity; display: flex; justify-content: center; align-items: center; }
+    .css-book {
+        padding: 8px 18px; color: #ffffff; font-weight: bold; font-size: 13px;
+        border-radius: 4px 12px 12px 4px; border-left: 6px solid var(--accent-gold);
+        box-shadow: 2px 4px 12px rgba(0,0,0,0.6); white-space: nowrap;
+        letter-spacing: 1px;
+        background: rgba(0,0,0,0.65); backdrop-filter: blur(5px);
+    }
+
+    .logo-container { position: relative; z-index: 10; display: flex; gap: 55px; }
+    .footer-credit {
+        position: relative; z-index: 10;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 13px; color: #94a3b8;
+        letter-spacing: 1.5px; text-align: center;
+    }
+    .footer-credit span.gold { color: var(--accent-gold); font-weight: 700; }
+
+    .social-btn {
+        position: relative; width: 88px; height: 88px; border-radius: 50%;
+        display: flex; justify-content: center; align-items: center;
+        text-decoration: none; transition: transform 0.3s ease;
+    }
+    .social-btn::after {
+        content: ''; position: absolute; inset: -5px; border-radius: 50%;
+        z-index: -2; filter: blur(20px); opacity: 0.5; transition: opacity 0.3s ease;
+    }
+    .snake-track { position: absolute; inset: 0; border-radius: 50%; overflow: hidden; z-index: -1; }
+    .snake-track::before {
+        content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+        animation: spinBeam 2s linear infinite;
+    }
+    .inner-logo {
+        position: absolute; inset: 4px; background: var(--deep-bg); border-radius: 50%;
+        display: flex; justify-content: center; align-items: center; z-index: 1;
+        border: 1px solid rgba(255,255,255,0.08);
+    }
+    .inner-logo svg { width: 38px; height: 38px; transition: transform 0.3s ease; }
+
+    .wrapper-x::after { background: #1da1f2; }
+    .wrapper-x .snake-track::before { background: conic-gradient(transparent 70%, #1da1f2 100%); }
+    .wrapper-x .inner-logo svg { fill: #ffffff; }
+
+    .wrapper-insta::after { background: #E1306C; }
+    .wrapper-insta .snake-track::before { background: conic-gradient(transparent 70%, #E1306C 100%); }
+    .wrapper-insta .inner-logo svg { fill: url(#instaGrad); }
+
+    .wrapper-youtube::after { background: #FF0000; }
+    .wrapper-youtube .snake-track::before { background: conic-gradient(transparent 70%, #FF0000 100%); }
+    .wrapper-youtube .inner-logo svg { fill: #FF0000; }
+
+    .social-btn:hover { transform: translateY(-8px); }
+    .social-btn:hover::after { opacity: 0.9; }
+    .social-btn:hover .inner-logo svg { transform: scale(1.15); }
+
+    /* =========================================
+       9. RESPONSIVE DESIGN (TABLET & MOBILE)
+       ========================================= */
+    @media (max-width: 960px) {
+        .heyzine-stage-box { height: 520px; }
+    }
+
+    @media (max-width: 640px) {
+        .reader-top-bar { justify-content: center; text-align: center; }
+        .action-links { justify-content: center; width: 100%; }
+        .heyzine-stage-box { height: 440px; }
+        .viewer-inner-stage { padding: 12px; }
+        .info-block { padding: 25px 20px; }
+        .info-heading { font-size: 21px; }
+        .logo-container { gap: 22px; }
+        .social-btn { width: 70px; height: 70px; }
+        .inner-logo svg { width: 28px; height: 28px; }
+        .floral-wing { display: none; }
+    }
+</style>
+</head>
+<body class="locked">
+    <div id="header"></div>
+
+<script>
+fetch("header.html")
+.then(response => response.text())
+.then(data => {
+    document.getElementById("header").innerHTML = data;
+})
+.catch(error => console.error("Header loading error:", error));
+</script>
+
+<!-- Instagram SVG Gradient -->
+<svg style="width:0;height:0;position:absolute;" aria-hidden="true" focusable="false">
+  <linearGradient id="instaGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+    <stop offset="0%" stop-color="#f09433" />
+    <stop offset="25%" stop-color="#e6683c" />
+    <stop offset="50%" stop-color="#dc2743" />
+    <stop offset="75%" stop-color="#cc2366" />
+    <stop offset="100%" stop-color="#bc1888" />
+  </linearGradient>
+</svg>
+
+<!-- =========================================
+     INTRO SCREEN
+     ========================================= -->
+<div id="intro-screen">
+    <div id="particle-container"></div>
+
+    <div class="school-logo-container">
+        <div class="school-logo-track"></div>
+        <img src="https://iili.io/BLYsKQa.md.png" alt="DBRA CM Shri School Logo">
+    </div>
+
+    <div class="intro-text-container">
+        <span class="text-stylish">Unveiling the Creative Soul of</span>
+        <span class="text-formal">DBRA CM SHRI SCHOOL</span>
+        <span class="text-magazine-title">
+            <span class="floral-wing"><span class="dot-sm"></span><span class="dot-md"></span><span class="flower">✿</span></span>
+            <span class="avinya-word"><span class="avi-hi">अवि</span><span class="nya-en">nya</span></span>
+            <span class="floral-wing"><span class="flower">✿</span><span class="dot-md"></span><span class="dot-sm"></span></span>
+        </span>
+    </div>
+    
+    <div class="book-wrapper">
+        <div class="book">
+            <div class="page p4"></div>
+            <div class="page p3"></div>
+            <div class="page p2"></div>
+            <div class="page p1"></div>
+            <div class="cover">
+                <span style="font-family:'Rozha One',serif; color:#050a1f;">अवि</span><span style="font-family:'Playfair Display',serif; font-style:italic; color:#b80028;">nya</span>
+            </div>
+        </div>
+    </div>
+
+    <button id="skip-intro-btn" title="Enter Magazine Directly">Skip Intro ➔</button>
+</div>
+
+<!-- =========================================
+     MAIN CONTENT
+     ========================================= -->
+<div id="main-content">
+    
+    <!-- School Banner -->
+    <div class="banner-container">
+        <img src="https://iili.io/BLRiove.md.png" alt="DBRA CM Shri School Digital Library & Magazine Banner">
+    </div>
+
+    <!-- Infinite Sliding Marquee Ticker -->
+    <div class="marquee-wrapper">
+        <div class="marquee-track">
+            <div class="marquee-content">
+                ✨ अ वि n y a DIGITAL EDITION <span class="sep">•</span> ✒️ STUDENT POETRY & PROSE <span class="sep">•</span> 🎨 ARTISTIC GALLERY <span class="sep">•</span> 🏆 ANNUAL ACHIEVEMENTS <span class="sep">•</span> 📜 EDITORIAL REFLECTIONS <span class="sep">•</span> 🚀 YOUNG VISIONARIES <span class="sep">•</span> 📖 NAND NAGRI LITERARY CHRONICLES <span class="sep">•</span>
+            </div>
+            <div class="marquee-content">
+                ✨ अ वि n y a DIGITAL EDITION <span class="sep">•</span> ✒️ STUDENT POETRY & PROSE <span class="sep">•</span> 🎨 ARTISTIC GALLERY <span class="sep">•</span> 🏆 ANNUAL ACHIEVEMENTS <span class="sep">•</span> 📜 EDITORIAL REFLECTIONS <span class="sep">•</span> 🚀 YOUNG VISIONARIES <span class="sep">•</span> 📖 NAND NAGRI LITERARY CHRONICLES <span class="sep">•</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Quote Section -->
+    <section class="inspiring-section">
+        <div class="magazine-badge reveal-on-scroll pop-up-scale">✦ Official School Publication ✦</div>
+        <h1 class="inspire-text reveal-on-scroll pop-up-scale">
+            <span class="floral-wing"><span class="dot-sm"></span><span class="dot-md"></span><span class="flower">✿</span></span>
+            <span class="avinya-word"><span class="avi-hi">अवि</span><span class="nya-en">nya</span></span>
+            <span class="floral-wing"><span class="flower">✿</span><span class="dot-md"></span><span class="dot-sm"></span></span>
+            : Where Young Minds Ink Tomorrow
+        </h1>
+        <p class="inspire-sub reveal-on-scroll reveal-up">
+            Flip through our interactive 3D school magazine below—use either the corner pages inside the book or our custom webpage control dock underneath.
+        </p>
+    </section>
+
+    <!-- =========================================
+         INTEGRATED HEYZINE FLIPBOOK & WEBPAGE CONTROLS
+         ========================================= -->
+    <section class="flipbook-lounge reveal-on-scroll pop-up-scale" id="magazine-reader">
+        
+        <!-- Top Bar -->
+        <div class="reader-top-bar">
+            <div class="reader-brand-title">
+                <span class="live-dot"></span>
+                <span><span class="avinya-word"><span class="avi-hi">अवि</span><span class="nya-en">nya</span></span> &nbsp;—&nbsp; INTERACTIVE 3D FLIPBOOK</span>
+            </div>
+
+            <div class="action-links">
+                <button class="btn-action gold-btn" onclick="toggleTheaterMode()" id="theater-btn">
+                    🎭 Expand Wide Mode
+                </button>
+                <a href="https://heyzine.com/flip-book/fae2ffcd40.html" target="_blank" class="btn-action">
+                    ↗ Open Standalone Flipbook
+                </a>
+                <a href="https://drive.google.com/file/d/1ITfgqheWwEgTAxeBxCXSFaWgV-jo0TkT/view?usp=sharing" target="_blank" class="btn-action">
+                    ⬇ Download Original PDF
+                </a>
+            </div>
+        </div>
+
+        <!-- Glowing Neon Snake Frame -->
+        <div class="viewer-outer-frame" id="fullscreen-target">
+            <div class="viewer-inner-stage">
+                
+                <!-- Embedded Heyzine Flipbook -->
+                <div class="heyzine-stage-box" id="heyzine-stage-box">
+                    <iframe 
+                        id="heyzine-iframe"
+                        allowfullscreen="allowfullscreen" 
+                        allow="clipboard-write" 
+                        scrolling="no" 
+                        class="fp-iframe" 
+                        src="https://heyzine.com/flip-book/fae2ffcd40.html#page/1"
+                        title="अविnya Interactive Flipbook">
+                    </iframe>
+                </div>
+
+                <!-- Webpage Custom Control Dock -->
+                <div class="reader-toolbar">
+                    <button class="tool-btn" onclick="goToPage(1)" title="Jump to Front Cover">
+                        ⏮ Cover
+                    </button>
+                    <button class="tool-btn" onclick="changePage(-1)" title="Flip to Previous Page">
+                        ⬅ Prev Page
+                    </button>
+
+                    <span class="page-counter-badge" id="page-indicator">Page 1</span>
+
+                    <button class="tool-btn" onclick="changePage(1)" title="Flip to Next Page">
+                        Next Page ➔
+                    </button>
+
+                    <!-- Direct Page Jump Input -->
+                    <div class="page-jump-group">
+                        <input type="number" id="jump-page-input" min="1" placeholder="Page #" onkeydown="if(event.key==='Enter') jumpFromInput()">
+                        <button class="page-jump-btn" onclick="jumpFromInput()">GO</button>
+                    </div>
+
+                    <button class="tool-btn" onclick="adjustStageZoom(0.08)" title="Zoom In Stage">
+                        🔍 +
+                    </button>
+                    <button class="tool-btn" onclick="adjustStageZoom(-0.08)" title="Zoom Out Stage">
+                        🔍 -
+                    </button>
+                    <button class="tool-btn" id="sound-toggle-btn" onclick="toggleSound()">
+                        🔊 Sound: ON
+                    </button>
+                    <button class="tool-btn" onclick="toggleFullScreen()">
+                        ⛶ Fullscreen
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================================
+         SLIDING INFORMATIONAL BLOCKS
+         ========================================= -->
+    <div class="info-container">
+        <article class="info-block reveal-on-scroll slide-in-left">
+            <h2 class="info-heading">About "<span class="avinya-word"><span class="avi-hi">अवि</span><span class="nya-en">nya</span></span>" — The Mirror of Our School</h2>
+            <p class="info-text"><strong><span class="avinya-word"><span class="avi-hi">अवि</span><span class="nya-en">nya</span></span></strong> is more than a school magazine; it is the living heartbeat of <strong>D.B.R.A. CM Shri School, Nand Nagri</strong>. Born from the imagination, discipline, and creative courage of our students and educators, every page captures the spirit of curiosity that defines our classrooms.</p>
+            <p class="info-text">From reflections on environmental stewardship and Yamuna conservation to explorations of Indian space science, literature, and cultural heritage, <strong><span class="avinya-word"><span class="avi-hi">अवि</span><span class="nya-en">nya</span></span></strong> bridges timeless human values with twenty-first-century digital expression.</p>
+        </article>
+
+        <article class="info-block reveal-on-scroll slide-in-right">
+            <h2 class="info-heading">Why a School Magazine Matters in the Digital Age</h2>
+            <p class="info-text">When students see their own verses, artwork, and research published in an interactive 3D flipbook, they transition from consumers of knowledge to creators of culture. Our digital edition ensures that every parent, alumnus, teacher, and learner can flip through these treasured memories anytime, anywhere, on any screen.</p>
+        </article>
+
+        <article class="info-block reveal-on-scroll slide-in-left">
+            <h2 class="info-heading">Highlights of This Special Edition</h2>
+            <p class="info-text">Dive into the curated chapters of <strong><span class="avinya-word"><span class="avi-hi">अवि</span><span class="nya-en">nya</span></span></strong> featuring contributions from primary to senior secondary wings:</p>
+            <ul class="info-list">
+                <li>Messages from the Principal & Editorial Desk</li>
+                <li>Kavya Sangam: Hindi & Punjabi Poetic Expressions</li>
+                <li>English Literary Corner: Stories, Debates & Plays</li>
+                <li>Kaushalbodh & Experiential Learning Showcases</li>
+                <li>ISRO & Scientific Horizons by Young Researchers</li>
+                <li>Student Art Gallery, Handicrafts & Campus Laurels</li>
+            </ul>
+        </article>
+    </div>
+
+    <!-- =========================================
+         FOOTER WITH FLOWING LITERARY STREAM
+         ========================================= -->
+    <footer class="site-footer" id="footer-section">
+        <div id="flow-container"></div>
+        <div class="logo-container">
+            <a href="https://x.com/CMSHRINANDNAGRI" target="_blank" class="social-btn wrapper-x" aria-label="X Twitter">
+                <div class="snake-track"></div>
+                <div class="inner-logo"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.008 3.84H5.078z"/></svg></div>
+            </a>
+            <a href="https://instagram.com/cmshrischoolnandnagri" target="_blank" class="social-btn wrapper-insta" aria-label="Instagram">
+                <div class="snake-track"></div>
+                <div class="inner-logo"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></div>
+            </a>
+            <a href="https://youtube.com/@CMSHRISCHOOLNANDNAGRI" target="_blank" class="social-btn wrapper-youtube" aria-label="YouTube">
+                <div class="snake-track"></div>
+                <div class="inner-logo"><svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></div>
+            </a>
+        </div>
+        <div class="footer-credit">
+            © <span class="gold">DBRA CM SHRI SCHOOL, NAND NAGRI</span> • <span class="avinya-word"><span class="avi-hi">अवि</span><span class="nya-en">nya</span></span> DIGITAL MAGAZINE ARCHIVE
+        </div>
+    </footer>
+
+</div>
+
+<script>
+/* =========================================================
+   1. HEYZINE FLIPBOOK CONTROLLER & SOUND SYNTHESIZER
+   ========================================================= */
+const HEYZINE_BASE_URL = "https://heyzine.com/flip-book/fae2ffcd40.html";
+let currentPage = 1;
+let currentZoom = 1;
+let soundEnabled = true;
+
+const AudioCtx = window.AudioContext || window.webkitAudioContext;
+let audioCtx = null;
+
+function playPageFlipSound() {
+    if (!soundEnabled) return;
+    try {
+        if (!audioCtx) audioCtx = new AudioCtx();
+        const duration = 0.2;
+        const bufferSize = audioCtx.sampleRate * duration;
+        const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+        const data = buffer.getChannelData(0);
+        for (let i = 0; i < bufferSize; i++) {
+            const env = Math.sin((i / bufferSize) * Math.PI);
+            data[i] = (Math.random() * 2 - 1) * env * 0.16;
+        }
+        const noise = audioCtx.createBufferSource();
+        noise.buffer = buffer;
+
+        const filter = audioCtx.createBiquadFilter();
+        filter.type = 'bandpass';
+        filter.frequency.setValueAtTime(1100, audioCtx.currentTime);
+        filter.Q.setValueAtTime(1.8, audioCtx.currentTime);
+
+        noise.connect(filter);
+        filter.connect(audioCtx.destination);
+        noise.start();
+    } catch (e) {}
+}
+
+function toggleSound() {
+    soundEnabled = !soundEnabled;
+    document.getElementById('sound-toggle-btn').innerText = soundEnabled ? '🔊 Sound: ON' : '🔇 Sound: OFF';
+}
+
+// Navigate Heyzine Flipbook via #page/N hash without reloading the iframe
+function goToPage(pageNum) {
+    currentPage = Math.max(1, parseInt(pageNum, 10) || 1);
+    const iframe = document.getElementById('heyzine-iframe');
+    iframe.src = `${HEYZINE_BASE_URL}#page/${currentPage}`;
+    document.getElementById('page-indicator').innerText = `Page ${currentPage}`;
+    playPageFlipSound();
+}
+
+function changePage(delta) {
+    goToPage(currentPage + delta);
+}
+
+function jumpFromInput() {
+    const input = document.getElementById('jump-page-input');
+    if (input.value) {
+        goToPage(input.value);
+        input.value = '';
+    }
+}
+
+function adjustStageZoom(delta) {
+    currentZoom = Math.min(1.25, Math.max(0.8, currentZoom + delta));
+    const stageBox = document.getElementById('heyzine-stage-box');
+    stageBox.style.transform = `scale(${currentZoom})`;
+}
+
+function toggleTheaterMode() {
+    const lounge = document.getElementById('magazine-reader');
+    const btn = document.getElementById('theater-btn');
+    lounge.classList.toggle('theater-mode');
+    if (lounge.classList.contains('theater-mode')) {
+        btn.innerText = '🗗 Standard View';
+    } else {
+        btn.innerText = '🎭 Expand Wide Mode';
+    }
+}
+
+function toggleFullScreen() {
+    const elem = document.getElementById('fullscreen-target');
+    if (!document.fullscreenElement) {
+        if (elem.requestFullscreen) elem.requestFullscreen();
+    } else {
+        if (document.exitFullscreen) document.exitFullscreen();
+    }
+}
+
+/* =========================================================
+   2. INTRO ANIMATION, PARTICLES & SCROLL OBSERVERS
+   ========================================================= */
+document.addEventListener("DOMContentLoaded", () => {
+
+    // --- A. LITERARY PARTICLE GENERATOR ---
+    function generateParticles() {
+        const container = document.getElementById('particle-container');
+        const items = [
+            '✒️', '🎨', '📜', '🎭', '✨', '📖', '🏆', '🌟', '🪶', '🎶', '🌺', '📚',
+            'अविnya', 'Poetry', 'Creativity', 'Literature', 'Artistry',
+            'Dreams', 'Chronicles', 'Voices', 'Sahitya', 'Expression',
+            'Munshi Premchand', 'Rabindranath Tagore', 'Kalidasa', 'Shakespeare'
+        ];
+
+        let dynamicCSS = "";
+
+        for (let i = 0; i < 45; i++) {
+            const el = document.createElement('div');
+            el.className = 'particle';
+            const randomItem = items[Math.floor(Math.random() * items.length)];
+            el.innerText = randomItem;
+            
+            let posX = Math.random() * 100;
+            let posY = Math.random() * 100;
+            
+            if (posX > 32 && posX < 68 && posY > 32 && posY < 68) {
+                posX = posX > 50 ? posX + 22 : posX - 22;
+            }
+
+            el.style.left = posX + '%';
+            el.style.top = posY + '%';
+
+            if (randomItem.length <= 2) {
+                el.style.fontSize = `clamp(1.8rem, ${2.5 + Math.random() * 2.5}vw, 3.6rem)`;
+                el.style.color = 'rgba(255, 215, 0, 0.75)';
+            } else {
+                el.style.fontSize = `clamp(0.95rem, ${1.3 + Math.random()}vw, 1.85rem)`;
+                el.style.color = `rgba(255, 255, 255, ${0.12 + Math.random() * 0.22})`;
+            }
+
+            const duration = 1.8 + Math.random() * 2.8;
+            const delay = Math.random() * 1.5;
+            const animationName = `floatUpSide${i}`;
+            const endY = -(60 + Math.random() * 100);
+            const endX = (Math.random() - 0.5) * 110;
+            const endRot = (Math.random() - 0.5) * 45;
+
+            dynamicCSS += `
+            @keyframes ${animationName} {
+                0% { opacity: 0; transform: translateY(20px) rotate(0deg) scale(0.8); }
+                20% { opacity: 1; }
+                80% { opacity: 1; }
+                100% { opacity: 0; transform: translate(${endX}px, ${endY}px) rotate(${endRot}deg) scale(1.15); }
+            }
+            `;
+            
+            el.style.animation = `${animationName} ${duration}s ease-in-out ${delay}s infinite`;
+            container.appendChild(el);
+        }
+
+        const safeStyleSheet = document.createElement("style");
+        safeStyleSheet.innerText = dynamicCSS;
+        document.head.appendChild(safeStyleSheet);
+    }
+    generateParticles();
+
+    // --- B. INTRO TO MAIN CONTENT TRANSITION ---
+    const introScreen = document.getElementById('intro-screen');
+    const mainContent = document.getElementById('main-content');
+    const skipBtn = document.getElementById('skip-intro-btn');
+    let introFinished = false;
+
+    function finishIntro() {
+        if (introFinished) return;
+        introFinished = true;
+        introScreen.style.opacity = '0';
+        setTimeout(() => {
+            introScreen.style.visibility = 'hidden';
+            introScreen.style.display = 'none';
+            document.body.classList.remove('locked');
+            
+            mainContent.style.display = 'block';
+            void mainContent.offsetWidth;
+            mainContent.style.opacity = '1';
+            
+            initializeScrollObserver();
+            initFooterAnimation();
+        }, 850);
+    }
+
+    const introTimer = setTimeout(finishIntro, 5000);
+    skipBtn.addEventListener('click', () => {
+        clearTimeout(introTimer);
+        finishIntro();
+    });
+
+    // --- C. MULTI-DIRECTIONAL SCROLL REVEAL ---
+    function initializeScrollObserver() {
+        const revealElements = document.querySelectorAll('.reveal-on-scroll');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('reveal-active');
+                    }, index * 90);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+
+        revealElements.forEach(el => observer.observe(el));
+    }
+
+    // --- D. FOOTER FLOWING LITERARY STREAM ---
+    function initFooterAnimation() {
+        const container = document.getElementById('flow-container');
+        const footerSection = document.getElementById('footer-section');
+        
+        const elementsData = [
+            { type: 'emoji', content: '✒️' }, { type: 'emoji', content: '🎨' },
+            { type: 'emoji', content: '📜' }, { type: 'emoji', content: '📚' },
+            { type: 'book', content: 'अविnya', color: 'rgba(212, 175, 55, 0.45)' },
+            { type: 'book', content: 'Sahitya', color: 'rgba(255, 0, 127, 0.4)' },
+            { type: 'book', content: 'Poetry & Art', color: 'rgba(0, 168, 255, 0.4)' },
+            { type: 'book', content: 'DBRA CM SHRI', color: 'rgba(44, 62, 80, 0.6)' }
+        ];
+
+        const items = [];
+        const itemCount = 16;
+
+        for (let i = 0; i < itemCount; i++) {
+            const data = elementsData[Math.floor(Math.random() * elementsData.length)];
+            const el = document.createElement('div');
+            el.className = 'flow-item';
+
+            let rotationSpeed, initialRotation;
+
+            if (data.type === 'emoji') {
+                el.innerText = data.content;
+                el.style.fontSize = (20 + Math.random() * 16) + 'px';
+                rotationSpeed = (Math.random() - 0.5) * 0.5;
+                initialRotation = Math.random() * 360;
+            } else {
+                el.innerText = data.content;
+                el.classList.add('css-book');
+                el.style.backgroundColor = data.color;
+                rotationSpeed = (Math.random() - 0.5) * 0.15;
+                initialRotation = (Math.random() - 0.5) * 20;
+            }
+
+            container.appendChild(el);
+
+            items.push({
+                element: el,
+                x: Math.random() * footerSection.offsetWidth,
+                speed: 0.25 + Math.random() * 0.4,
+                waveOffset: Math.random() * Math.PI * 2,
+                amplitude: 30 + Math.random() * 40,
+                rotation: initialRotation,
+                rotSpeed: rotationSpeed,
+                direction: i % 2 === 0 ? 1 : -1
+            });
+        }
+
+        function animateFlow() {
+            const fWidth = footerSection.offsetWidth;
+            const fHeight = footerSection.offsetHeight;
+            const centerY = fHeight / 2;
+            const centerX = fWidth / 2;
+
+            items.forEach(item => {
+                item.x += item.speed * item.direction;
+
+                if (item.direction === 1 && item.x > fWidth + 120) item.x = -120;
+                if (item.direction === -1 && item.x < -120) item.x = fWidth + 120;
+
+                let y = centerY + Math.sin((item.x / 140) + item.waveOffset) * item.amplitude;
+                item.rotation += item.rotSpeed;
+
+                let distFromCenter = Math.abs(item.x - centerX);
+                let opacity = 1 - (distFromCenter / (fWidth / 1.5));
+                opacity = Math.max(0, Math.min(0.55, opacity));
+
+                let offset = item.element.offsetWidth / 2;
+                let offsetY = item.element.offsetHeight / 2;
+
+                item.element.style.transform = `translate(${item.x - offset}px, ${y - offsetY}px) rotate(${item.rotation}deg)`;
+                item.element.style.opacity = opacity;
+            });
+
+            requestAnimationFrame(animateFlow);
+        }
+        animateFlow();
+    }
+});
+</script>
+
+</body>
+</html>

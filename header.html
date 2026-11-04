@@ -1,0 +1,100 @@
+
+<style>
+.school-header {
+    width: 100%;
+    min-height: 62px;
+    padding: 8px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    background: #071329;
+    border-bottom: 2px solid #00f3ff;
+    font-family: Arial, sans-serif;
+}
+
+.school-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.school-brand img {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+}
+
+.school-brand .school-name {
+    color: white;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 1.5;
+}
+
+.school-brand .school-name span {
+    display: block;
+    color: #00f3ff;
+    font-size: 10px;
+    letter-spacing: 1px;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 9px 10px;
+    border-radius: 5px;
+    transition: .3s;
+}
+
+.nav-links a:hover {
+    background: #00f3ff;
+    color: #050a1f;
+}
+
+.nav-links a.active {
+    color: #00f3ff;
+}
+
+@media(max-width:750px) {
+    .school-header {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .nav-links {
+        justify-content: center;
+    }
+}
+</style>
+
+<header class="school-header">
+
+    <div class="school-brand">
+        <img src="https://iili.io/BLYsKQa.md.png" alt="School Logo">
+
+        <div class="school-name">
+            D.B.R.A. CM SHRI SCHOOL
+            <span>NAND NAGRI</span>
+        </div>
+    </div>
+
+    <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="acadmics.html">Academics</a>
+        <a href="achievement.html">Achievements</a>
+        <a href="about.html">About Us</a>
+    </nav>
+
+</header>
